@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react'
-import {Table,Container } from 'semantic-ui-react'
+import {Table } from 'semantic-ui-react'
 import EmployerService from '../services/employerService'
 export default function Employers() {
     const [employers, setEmployers] = useState([])
@@ -10,7 +10,7 @@ export default function Employers() {
     }, [])
     return (
         <div>
-            <Container>
+            
              <Table celled>
     <Table.Header>
       <Table.Row>
@@ -39,7 +39,7 @@ export default function Employers() {
       
     </Table.Body>
   </Table>
-  </Container>
+
         </div>
     )
 }

@@ -3,20 +3,19 @@ import React from "react";
 import * as Yup from 'yup';
 import {
   Form,
-  Container,
   Header,
   Input,
   TextArea,
   Grid,
   Select,
-  Button
+  Button,
 } from "semantic-ui-react";
 import JobAdvertisementService from "../services/jobAdvertisementService";
 export default function AddJobAdvertisement() {
-  const workTypes = [{ text: "İş Yerinden",value:"İş Yerinden" }, {text: "Uzaktan" ,value:"Uzaktan"}];
-  const workTimes = [{ text: "Yarı Zamanlı" ,value:"Yarı Zamanlı"}, { text: "Tam Zamanlı" ,value:"Tam Zamanlı"}];
+  const workTypes = [{text:"Çalışma Türünü Seçiniz"},{ text: "İş Yerinden",value:"İş Yerinden" }, {text: "Uzaktan" ,value:"Uzaktan"}];
+  const workTimes = [{text:"Çalışma Zamanı Seçiniz"},{ text: "Yarı Zamanlı" ,value:"Yarı Zamanlı"}, { text: "Tam Zamanlı" ,value:"Tam Zamanlı"}];
   
-  const {values,errors,handleSubmit,handleChange,setFieldValue,touched} = useFormik({
+  const {values,errors,handleSubmit,handleChange,setFieldValue,resetForm} = useFormik({
     initialValues : {
       description:"",
       workType:"",
@@ -25,12 +24,16 @@ export default function AddJobAdvertisement() {
       numberOfPosition:"",
       minSalary:"",
       maxSalary:"",
-      city:""
+      city:"",
+      deadLine:""
     },
     onSubmit : values =>{
-      // let jobAdvertisementService = new JobAdvertisementService()
-      // jobAdvertisementService.addJobAdvertisement(values).then()
-      values.employer={id:1}
+       let jobAdvertisementService = new JobAdvertisementService()
+       values.employer={id:3}
+       jobAdvertisementService.addJobAdvertisement(values).then(result=>{
+         console.log(result.data)
+       })
+      
       console.log(values)
     }, 
     validationSchema:Yup.object({
@@ -38,7 +41,9 @@ export default function AddJobAdvertisement() {
       minSalary:Yup.number(),
       workType:Yup.string().required("Lütfen bir çalışma tipi seçiniz"),
       numberOfPosition:Yup.number().required("Lütfen açık pozisyon sayısı giriniz")
-    })
+    }),
+    
+    
   })
   const handleChangeSemantic = (value, fieldName) => {
     setFieldValue(fieldName, value)
@@ -46,8 +51,9 @@ export default function AddJobAdvertisement() {
 
   return (
     <div>
+     
       <Form onSubmit={handleSubmit}>
-        <Container>
+        
           <Grid celled>
             <Grid.Row>
               <Grid.Column width="16" textAlign="center">
@@ -128,16 +134,19 @@ export default function AddJobAdvertisement() {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column><Input placeholder="Şehir" name="city" style={{ width: "100%" }} onChange={handleChange} value={values.city}/></Grid.Column>
+              <Grid.Column width="8"><Input placeholder="Şehir" name="city" style={{ width: "100%" }} onChange={handleChange} value={values.city}/></Grid.Column>
+              <Grid.Column width="8">Son Başvuru Tarihi : <Input name="deadLine" onChange={handleChange} type="date" style={{width:"80%"}}/></Grid.Column>
             </Grid.Row>
            
-          </Grid>
+         
           <Grid.Row>
-          <Button color='violet' size="huge" type="submit" style={{width:"100%"}}>İlan Yayınla</Button>
+          <Button color='violet' size="huge" type="submit" style={{width:"100%"}}>İlanı Yayınla</Button>
           </Grid.Row>
-        </Container>
+          </Grid>
+        
         
       </Form>
+      
     </div>
   );
 }
