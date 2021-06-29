@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header, Button } from 'semantic-ui-react'
+import { NavLink } from "react-router-dom";
 
 
 export default function Main() {
@@ -8,7 +9,7 @@ export default function Main() {
         backgroundImage:"url(https://res.cloudinary.com/dm4lumruz/image/upload/c_scale,h_800/v1623357011/hrms-images/pexels-charles-parker-5847359_gmwz3c.jpg)"}}>
             
             <Header as='h1' style={{textAlign:"center", marginBottom:"200px", fontSize:"5em",color:"white"}}>Aradığın işe hemen başvur</Header>
-            <Button inverted color='violet' size="huge" fluid >
+            <Button inverted color='violet' size="huge" fluid as={NavLink} to="/openToWorkList">
                 Tekliflere göz at
              </Button>
             

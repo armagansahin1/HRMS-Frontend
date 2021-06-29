@@ -9,6 +9,10 @@ export default class JobAdvertisementService{
         return axios.get("http://localhost:8080/api/jobAdvertisements/getAll")
     }
 
+    getAdvertisementsPageFormat(pageNo,pageSize){
+        return axios.get(`http://localhost:8080/api/jobAdvertisements/getPageFormat?pageNo=${pageNo}&pageSize=${pageSize}`)
+    }
+
     changeAdvertismentStatus(id,status){
         return axios.post(`http://localhost:8080/api/jobAdvertisements/changeStatus?id=${id}&status=${status}`)
     }
@@ -16,5 +20,10 @@ export default class JobAdvertisementService{
         return axios.get("http://localhost:8080/api/jobAdvertisements/findAllByOrderByRelaseDateDesc")
     }
     
+    getByAdvertismentStatusTrueOrderByRelaseDateDesc(){
+        return axios.get("http://localhost:8080/api/jobAdvertisements/getByAdvertismentStatusTrueOrderByRelaseDateDesc")
+    }
+    
+
 
 }

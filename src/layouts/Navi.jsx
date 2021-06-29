@@ -9,7 +9,7 @@ export default function Navi() {
             
     <Menu widths="5" style={{marginBottom:"20px"}}>
             
-    <Menu.Item as={NavLink} to="/" link>
+    <Menu.Item as={NavLink} to="/">
       <Image src="https://res.cloudinary.com/dm4lumruz/image/upload/v1623344888/hrms-images/HRMSLOGO_ofbqt1.png"/>
     </Menu.Item>
     <Menu.Item as={NavLink}  className="nav-links"  to="/candidates" link>
@@ -18,7 +18,7 @@ export default function Navi() {
     <Menu.Item className="nav-links" as={NavLink} to="/employers" link>
         İş Verenler
     </Menu.Item>
-    <Menu.Item className="nav-links" link>
+    <Menu.Item className="nav-links" as={NavLink} to="/openToWorkList" link>
         Açık Pozisyonlar
     </Menu.Item>
     <Menu.Item className="nav-links">

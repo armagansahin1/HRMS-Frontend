@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Button, Table } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 
-export default function RelaseAdvertisement() {
+export default function PublishAdvertisement() {
 
     const [jobAdvertisements, setJobAdvertisements] = useState([])
     let jobAdvertisementService =new JobAdvertisementService()
@@ -14,11 +14,14 @@ export default function RelaseAdvertisement() {
     }, [])
 
     let setRelase=(id,status)=>{
-      jobAdvertisementService.changeAdvertismentStatus(id,status).then(result=>console.log(result.data))
-      window.location.reload()
+      jobAdvertisementService.changeAdvertismentStatus(id,status).then(result=>{
+        console.log(result.data)
+        jobAdvertisementService.getAllOrderByRelaseDateDesc().then(result=>{setJobAdvertisements(result.data.data)})
+      })
+      
     }
 
-
+   
     return (
         <div>
 
