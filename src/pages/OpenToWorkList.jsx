@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useFormik } from "formik";
-import { Table, Menu, Icon, Select } from 'semantic-ui-react'
+import { Table, Menu, Icon, Select,Pagination } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 
 
@@ -19,6 +19,7 @@ export default function OpenToWorkList() {
 
   const [jobAdvertisements, setJobAdvertisements] = useState([])
   const [pageCount, setPageCount] = useState()
+  const [activePage, setActivePage] = useState(1)
 
 
   useEffect(() => {
@@ -36,14 +37,25 @@ export default function OpenToWorkList() {
     },
   })
 
+  const handlePaginationChange = (e,{activePage})=>{
+    setActivePage(activePage)
+    jobAdvertisementService.getAdvertisementsPageFormat(activePage,10).then(result=>{
+      setJobAdvertisements(result.data.data)
+    })
+  }
+
   const handleChangeSemantic = (value, fieldName) => {
     setFieldValue(fieldName, value);
     jobAdvertisementService.getAdvertisementsPageFormat(1,value).then(result=>{
       setJobAdvertisements(result.data.data)
-      console.log(result.data)
+      setPageCount(parseInt(result.data.message))
+
     })
+
+   
   };
   return (
+    
     <div>
      <label>Sayfa Boyutunu Belirle : </label> <Select placeholder='Sayfa Boyutunu Seçin' name="pageSize" options={pageSizes} onChange={(event, data) =>
         handleChangeSemantic(data.value, "pageSize")
@@ -83,23 +95,20 @@ export default function OpenToWorkList() {
         </Table.Body>
 
         <Table.Footer>
-          <Table.Row>
-            <Table.HeaderCell colSpan='7'>
-              <Menu floated='right' pagination>
-                <Menu.Item as='a' icon >
-                  <Icon name='chevron left' />
-                </Menu.Item>
-                <Menu.Item as='a' icon>
-                  <Icon name='chevron right' />
-                </Menu.Item>
-
-
-              </Menu>
-            </Table.HeaderCell>
-          </Table.Row>
+ 
         </Table.Footer>
       </Table>
-
+      <Pagination
+    boundaryRange={0}
+    activePage={activePage}
+    defaultActivePage={1}
+    ellipsisItem={null}
+    firstItem={null}
+    lastItem={null}
+    siblingRange={1}
+    totalPages={pageCount}
+    onPageChange={handlePaginationChange}
+  />
     </div>
   )
 }
