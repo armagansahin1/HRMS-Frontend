@@ -16,7 +16,7 @@ export default function Candidates() {
     }, [])
     return (       
         <div>
-         
+         <Card.Group itemsPerRow="4">
             {candidates.map(candidate=>(
                <Card key={candidate?.id}>
                <Image src={photos.filter(photo=>photo.candidate?.id===candidate.id)[0]?.url} size="small" centered/>
@@ -30,7 +30,7 @@ export default function Candidates() {
              </Card>
             ))}
            
-      
+           </Card.Group>
         </div>
     )
 }

@@ -9,7 +9,7 @@ export default class JobAdvertisementService{
         return axios.get("http://localhost:8080/api/jobAdvertisements/getAll")
     }
 
-    getAdvertisementsPageFormat(pageNo,pageSize){
+    getAdvertisementsPageFormat(pageNo=1,pageSize=10){
         return axios.get(`http://localhost:8080/api/jobAdvertisements/getPageFormat?pageNo=${pageNo}&pageSize=${pageSize}`)
     }
 
@@ -17,13 +17,16 @@ export default class JobAdvertisementService{
         return axios.post(`http://localhost:8080/api/jobAdvertisements/changeStatus?id=${id}&status=${status}`)
     }
     getAllOrderByRelaseDateDesc(){
-        return axios.get("http://localhost:8080/api/jobAdvertisements/findAllByOrderByRelaseDateDesc")
+        return axios.get("http://localhost:8080/api/jobAdvertisements/findAllByOrderByPublishDateDesc")
     }
     
     getByAdvertismentStatusTrueOrderByRelaseDateDesc(){
-        return axios.get("http://localhost:8080/api/jobAdvertisements/getByAdvertismentStatusTrueOrderByRelaseDateDesc")
+        return axios.get("http://localhost:8080/api/jobAdvertisements/findAllByOrderByPublishDateDesc")
     }
     
+    getByWorkType(workType){
+        return axios.get(`http://localhost:8080/api/jobAdvertisements/getByWorkType?workType=${workType}`)
+    }
 
 
 }

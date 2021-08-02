@@ -10,10 +10,13 @@ export default function PublishAdvertisement() {
 
     useEffect(() => {
       
-      jobAdvertisementService.getAllOrderByRelaseDateDesc().then(result=>{setJobAdvertisements(result.data.data)})
+      jobAdvertisementService.getAllOrderByRelaseDateDesc().then(result=>{
+        setJobAdvertisements(result.data.data)
+        console.log(result.data)
+      })
     }, [])
 
-    let setRelase=(id,status)=>{
+    const setRelase=(id,status)=>{
       jobAdvertisementService.changeAdvertismentStatus(id,status).then(result=>{
         console.log(result.data)
         jobAdvertisementService.getAllOrderByRelaseDateDesc().then(result=>{setJobAdvertisements(result.data.data)})
@@ -46,9 +49,9 @@ export default function PublishAdvertisement() {
         {jobAdvertisements.map(jobAdvertisement=>(
              <Table.Row key={jobAdvertisement.id}>
             <Table.Cell>{jobAdvertisement.id}</Table.Cell>
-            <Table.Cell>{jobAdvertisement.employer?.user?.firstName} {jobAdvertisement.employer?.user?.lastName}</Table.Cell>
+            <Table.Cell>{jobAdvertisement.employer?.firstName} {jobAdvertisement.employer?.user?.lastName}</Table.Cell>
             <Table.Cell >{jobAdvertisement.employer?.companyName}</Table.Cell>
-            <Table.Cell >{jobAdvertisement.relaseDate}</Table.Cell>
+            <Table.Cell >{jobAdvertisement.publishDate}</Table.Cell>
             <Table.Cell >{jobAdvertisement.deadLine}</Table.Cell>
             <Table.Cell>{jobAdvertisement.advertismentStatus?<Button onClick={()=>{setRelase(jobAdvertisement.id,false)}} color="red">Yayından Kaldır</Button>
             :<Button onClick={()=>{setRelase(jobAdvertisement.id,true)}} color="green">Yayınla</Button>}</Table.Cell>

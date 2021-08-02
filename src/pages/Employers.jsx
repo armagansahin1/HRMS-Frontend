@@ -27,12 +27,12 @@ export default function Employers() {
         {employers.map(employer=>(
             <Table.Row key={employer.id}>
             <Table.Cell>
-              {employer.user?.firstName}
+              {employer.firstName}
             </Table.Cell>
-            <Table.Cell> {employer.user?.lastName}</Table.Cell>
-            <Table.Cell>{employer.company?.companyName}</Table.Cell>
-            <Table.Cell>{employer.user?.email}</Table.Cell>
-            <Table.Cell>{employer.company?.website}</Table.Cell>
+            <Table.Cell> {employer.lastName}</Table.Cell>
+            <Table.Cell>{employer.companyName}</Table.Cell>
+            <Table.Cell>{employer.email}</Table.Cell>
+            <Table.Cell >{employer.website}</Table.Cell>
             <Table.Cell>{employer.phone}</Table.Cell>
           </Table.Row>
         ))}
