@@ -9,6 +9,8 @@ import OpenToWorkList from '../pages/openToWork/OpenToWorkList';
 import PublishAdvertisement from '../pages/PublishAdvertisement';
 import CvDetails from '../pages/CvDetails';
 import EmployerRegisterForm from '../pages/EmployerRegisterForm';
+import CandidateRegisterForm from '../pages/CandidateRegisterForm';
+import LoginForm from '../pages/LoginForm';
 
 export default function Dashboard() {
     return (
@@ -24,6 +26,8 @@ export default function Dashboard() {
             <Route path="/publishAdvertisement" component={PublishAdvertisement}/>
             <Route path="/openToWorkList" component={OpenToWorkList}/>
             <Route path="/employerRegisterForm" component={EmployerRegisterForm}/>
+            <Route path="/candidateRegisterForm" component={CandidateRegisterForm}/>
+            <Route path="/loginForm" component={LoginForm}/>
             </Container>
         </div>
     )

@@ -8,4 +8,8 @@ export default class CandidateService{
     getCandidateDetails(candidateId){
       return axios.get(`http://localhost:8080/api/Candidates/getCandidateDetailsDto?candidateId=${candidateId}`)
     }
+
+    add(candidate){
+      return axios.post("http://localhost:8080/api/Candidates/add",candidate)
+    }
 }

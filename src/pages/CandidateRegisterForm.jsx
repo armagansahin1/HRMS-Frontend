@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { Grid,Header,Input,Button } from 'semantic-ui-react';
 import HrmsTextInput from "../utilities/customFormControl/HrmsTextInput";
 import AuthService from '../services/authService';
-export default function EmployerRegisterForm() {
 
-    const authService = new AuthService()
+export default function CandidateRegisterForm() {
+
     const [dateOfBirth, setDateOfBirth] = useState()
+
+    let authService = new AuthService()
 
     const initialValues = {
         firstName: "",
@@ -16,9 +18,7 @@ export default function EmployerRegisterForm() {
         dateOfBirth: "",
         email: "",
         password: "",
-        phone: "",
-        companyName: "",
-        website: ""
+        profession: ""
     }
 
     const validationSchema = Yup.object().shape({
@@ -27,14 +27,13 @@ export default function EmployerRegisterForm() {
         nationalityId: Yup.number().max(99999999999, "TC Kimlik numarası 11 haneli olmalıdır").min(10000000000, "TC Kimlik numarası 11 haneli olmalıdır")
             .required("Lütfen TC Kimlik Numaranızı giriniz").typeError("Kimlik numaranız geçerli değil"),
         email: Yup.string().required("Email adresinizi giriniz").email("Geçerli bir email adresi giriniz"),
-        phone : Yup.number().required("Lütfen Telefon Numarası giriniz").typeError("Geçerli bir numara giriniz"),
-        password : Yup.string().required("Lütfen bir şifre belirleyiniz")
-
+        password: Yup.string().required("Lütfen bir şifre belirleyiniz"),
+        profession: Yup.string().required("Lütfen mesleğinizi giriniz")
     })
 
-    const submit = (values)=>{
+    const submit = (values) => {
         values.dateOfBirth = dateOfBirth
-        authService.employerForRegister(values).then(result=>{
+        authService.candidateForRegister(values).then(result => {
             console.log(result.data)
         })
     }
@@ -47,10 +46,10 @@ export default function EmployerRegisterForm() {
 
                         <Grid.Row>
                             <Grid.Column width="16" textAlign="center">
-                                <Header as="h2">İş Veren Kaydı</Header>
+                                <Header as="h2">Üye Kaydı</Header>
                             </Grid.Column>
                         </Grid.Row>
-                        
+
                         <Grid.Row>
                             <Grid.Column width="16" textAlign="center">
                                 <Header as="h3">Kişisel Bilgiler</Header>
@@ -59,46 +58,34 @@ export default function EmployerRegisterForm() {
 
                         <Grid.Row>
                             <Grid.Column width="8">
-                                <HrmsTextInput placeHolder = "Adınız" name = "firstName"/>
+                                <HrmsTextInput placeHolder="Adınız" name="firstName" />
                             </Grid.Column>
                             <Grid.Column width="8">
-                                <HrmsTextInput placeHolder = "Soyadınız" name = "lastName"/>
+                                <HrmsTextInput placeHolder="Soyadınız" name="lastName" />
                             </Grid.Column>
                         </Grid.Row>
 
                         <Grid.Row>
                             <Grid.Column width="8">
-                                <HrmsTextInput placeHolder = "TC Kimlik No" name = "nationalityId"/>
+                                <HrmsTextInput placeHolder="TC Kimlik No" name="nationalityId" />
                             </Grid.Column>
                             <Grid.Column width="8">
-                            Doğum Tarihi : <Input type="date" name="dateOfBirth" style={{ width: "70%" }} onChange = {(e)=>{setDateOfBirth(e.target.value)}}/>
+                                Doğum Tarihi : <Input type="date" name="dateOfBirth" style={{ width: "70%" }} onChange={(e) => { setDateOfBirth(e.target.value) }} />
                             </Grid.Column>
                         </Grid.Row>
 
                         <Grid.Row>
                             <Grid.Column width="8">
-                                <HrmsTextInput placeHolder = "Email" name = "email"/>
+                                <HrmsTextInput placeHolder="Email" name="email" />
                             </Grid.Column>
                             <Grid.Column width="8">
-                                <HrmsTextInput placeHolder = "Şifre" name = "password"/>
+                                <HrmsTextInput placeHolder="Şifre" name="password" />
                             </Grid.Column>
                         </Grid.Row>
 
                         <Grid.Row>
-                            <Grid.Column width="16" textAlign="center">
-                                <Header as="h3">Şirket Bilgileri</Header>
-                            </Grid.Column>
-                        </Grid.Row>
-
-                        <Grid.Row centered>
-                            <Grid.Column width="4">
-                                <HrmsTextInput placeHolder = "Şirket Adı" name = "companyName"/>
-                            </Grid.Column>
-                            <Grid.Column width="4">
-                                <HrmsTextInput placeHolder = "Telefon Numarası" name = "phone"/>
-                            </Grid.Column>
-                            <Grid.Column width="5">
-                                <HrmsTextInput placeHolder = "Web sitesi" name = "website"/>
+                            <Grid.Column width = "16">
+                            <HrmsTextInput placeHolder="Mesleğiniz" name="profession" />
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
@@ -109,4 +96,3 @@ export default function EmployerRegisterForm() {
         </div>
     )
 }
-

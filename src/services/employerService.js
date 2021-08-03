@@ -5,7 +5,7 @@ export default class EmployerService{
         return axios.get("http://localhost:8080/api/Employers/getall")
     }
 
-    addEmployer(employerForRegisterDto){
-        return axios.post("http://localhost:8080/api/Employers/add",employerForRegisterDto)
+    addEmployer(employer){
+        return axios.post("http://localhost:8080/api/Employers/add",employer)
     }
 }
