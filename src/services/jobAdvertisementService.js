@@ -21,7 +21,7 @@ export default class JobAdvertisementService{
     }
     
     getByAdvertismentStatusTrueOrderByRelaseDateDesc(){
-        return axios.get("http://localhost:8080/api/jobAdvertisements/findAllByOrderByPublishDateDesc")
+        return axios.get("http://localhost:8080/api/jobAdvertisements/getByAdvertismentStatusTrueOrderByPublishDateDesc")
     }
     
     getByWorkType(workType){

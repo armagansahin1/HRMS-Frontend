@@ -97,7 +97,7 @@ export default function AddJobAdvertisement() {
     values.workType = { id: values.workTypesId }
     values.workTime = { id: values.workTimesId }
     values.deadline = deadline
-    values.employer = { id: 3 }    //Bu kısım değişecek
+    values.employer = { id: 1 }    //Bu kısım değişecek
 
     jobAdvertisementService.addJobAdvertisement(values).then(result => {
       console.log(result.data)
